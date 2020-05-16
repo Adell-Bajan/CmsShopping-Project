@@ -1,0 +1,18 @@
+<%- include('../_layouts/adminheader.ejs'); -%><br>
+    <div class="container" style="background-color: rgb(247, 247, 247);">
+        <br>
+        <%- include ('../messages') %>
+            <h2 class="page-title"> <i class="fa fa-plus" aria-hidden="true"></i> <b> Add a category</b></h2>
+            <br>
+            <a href="/admin/categories" class="btn btn-primary"><b>  Back to all categories </b><i class="fa fa-hand-o-left" style="font-size:23px"></i></a>
+            <br><br>
+            <form method="POST" action="/admin/categories/add-category">
+                <div class="form-group">
+                    <label for="">Title</label>
+                    <input type="text" class="form-control" name="title" value="<%= typeof title != 'undefined' ? title:'' %>" placeholder="Title">
+                </div>
+                <button class="btn btn-success">Submit</button>
+                <br><br>
+            </form>
+    </div>
+    <%- include('../_layouts/adminfooter.ejs'); -%>

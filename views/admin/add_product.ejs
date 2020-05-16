@@ -1,0 +1,53 @@
+<%- include('../_layouts/adminheader.ejs'); -%><br>
+    <div class="container" style="background-color: rgb(247, 247, 247);">
+        <br>
+        <%- include ('../messages') %>
+            <h2 class="page-title"> <i class="fa fa-plus" aria-hidden="true"></i> <b> Add a product</b></h2>
+            <br>
+            <a href="/admin/products" class="btn btn-primary"><b>  Back to all products </b><i class="fa fa-hand-o-left" style="font-size:23px"></i></a>
+            <br><br>
+            <form method="POST" action="/admin/products/add-product" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="">Title</label>
+                    <input type="text" class="form-control" name="title" value="<%= typeof title != 'undefined' ? title:'' %>" placeholder="Title">
+                </div>
+                <div class="form-group">
+                    <label for="">Description</label>
+                    <textarea name="desc" class="form-control" cols="30" rows="10" placeholder="Description"><%= desc %></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="">Category</label>
+                    <select name="category" class="form-control">
+						<% categories.forEach(function(cat) { %>
+							<option value="<%= cat.slug %>"><%= cat.title %></option>
+							<% }); %>
+					</select>
+                </div>
+                <div class="form-group">
+                    <label for="">Price</label>
+                    <input type="text" class="form-control" name="price" value="<%= typeof price != 'undefined' ? price:'' %>" placeholder="Price">
+                </div>
+                <div class="form-group">
+                    <label for="">Image</label>
+                    <input type="file" class="form-control" name="image" id="img">
+                    <img src="#" id="imgPreview" alt="">
+                </div>
+                <button class="btn btn-success">Submit</button>
+                <br><br>
+            </form>
+            <script>
+                function readURL(input) {
+                    if (input.files && input.files[0]) {
+                        var reader = new FileReader();
+                        reader.onload = function(e) {
+                            $("#imgPreview").attr('src', e.target.result).width(100).height(100);
+                        }
+                        reader.readAsDataURL(input.files[0]);
+                    }
+                }
+                $("#img").change(function() {
+                    readURL(this);
+                });
+            </script>
+    </div>
+    <%- include('../_layouts/adminfooter.ejs'); -%>
